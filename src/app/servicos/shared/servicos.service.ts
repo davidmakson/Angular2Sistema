@@ -6,39 +6,55 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 
+import { HttpUtilService } from '../../services/http-util-service';
+
 @Injectable()
 export class ServicosService {
 
-  private url: string = "http://jsonplaceholder.typicode.com/servicos";
+private path = 'servico';
 
-  constructor(private http: Http) { }
+	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	}
 
   getServicos(){
-    return this.http.get(this.url)
-      .map(res => res.json());
+    return this.http.get(this.httpUtil.url(this.path), this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   getServico(id){
-    return this.http.get(this.getServicoUrl(id))
-      .map(res => res.json());
+    return this.http.get(this.httpUtil.url(this.path + '/' + id), 
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   addServico(servico){
-    return this.http.post(this.url, JSON.stringify(servico))
-      .map(res => res.json());
+		let params = JSON.stringify(servico);
+
+    	return this.http.post(this.httpUtil.url(this.path), params, 
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros); 
   }
 
   updateServico(servico){
-    return this.http.put(this.getServicoUrl(servico.id), JSON.stringify(servico))
-      .map(res => res.json());
+		let params = JSON.stringify(servico);
+
+    	return this.http.put(this.httpUtil.url(this.path), params, 
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   deleteServico(id){
-    return this.http.delete(this.getServicoUrl(id))
-      .map(res => res.json());
+    return this.http.delete(this.httpUtil.url(this.path + '/' + id), 
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   private getServicoUrl(id){
-    return this.url + "/" + id;
+    return this.getServico(id);
   }
 }

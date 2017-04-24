@@ -6,39 +6,55 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 
+import { HttpUtilService } from '../../services/http-util-service';
+
 @Injectable()
 export class UsersService {
 
-  private url: string = "http://jsonplaceholder.typicode.com/users";
+private path = 'cliente';
 
-  constructor(private http: Http) { }
+	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	}
 
   getUsers(){
-    return this.http.get(this.url)
-      .map(res => res.json());
+    return this.http.get(this.httpUtil.url(this.path), this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   getUser(id){
-    return this.http.get(this.getUserUrl(id))
-      .map(res => res.json());
+    return this.http.get(this.httpUtil.url(this.path + '/' + id), 
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   addUser(user){
-    return this.http.post(this.url, JSON.stringify(user))
-      .map(res => res.json());
+		let params = JSON.stringify(user);
+
+    	return this.http.post(this.httpUtil.url(this.path), params, 
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros); 
   }
 
   updateUser(user){
-    return this.http.put(this.getUserUrl(user.id), JSON.stringify(user))
-      .map(res => res.json());
+		let params = JSON.stringify(user);
+
+    	return this.http.put(this.httpUtil.url(this.path), params, 
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   deleteUser(id){
-    return this.http.delete(this.getUserUrl(id))
-      .map(res => res.json());
+    return this.http.delete(this.httpUtil.url(this.path + '/' + id), 
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   private getUserUrl(id){
-    return this.url + "/" + id;
+    return this.getUser(id);
   }
 }

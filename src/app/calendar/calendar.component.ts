@@ -5,18 +5,7 @@ import {CreateComponent} from "../dialogs/create.component";
 
 @Component({
   selector: 'calendar-component',
-  template: `
-  <br>
-  <br>
-  <br>
-  <div class="column-left">
-    <daypilot-navigator [config]="navigatorConfig" [(date)]="calendarConfig.startDate"></daypilot-navigator>
-  </div>
-  <div class="column-main">
-    <daypilot-calendar #calendar [events]="events" [config]="calendarConfig" (viewChange)="viewChange()"></daypilot-calendar>
-  </div>
-  <create-dialog #create (close)="createClosed($event)"></create-dialog>
-  `,
+  templateUrl: './calendar.component.html',
   styles: [`
   .column-left {
     width: 160px;
@@ -75,7 +64,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   viewChange() {
-    this.ds.getEvents(this.calendar.control.visibleStart(), this.calendar.control.visibleEnd()).subscribe(result => this.events = result);
+    this.ds.getEvents(this.calendar.control.visibleStart()).subscribe(result => this.events = result);
 
   }
 

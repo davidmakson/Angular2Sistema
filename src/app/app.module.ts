@@ -2,12 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import {CalendarComponent} from "./calendar/calendar.component";
-import {DayPilot} from "daypilot-pro-angular";
-import {DataService} from "./backend/data.service";
-import {CreateComponent} from "./dialogs/create.component";
+import { DayPilot } from "daypilot-pro-angular";
+import { DataService } from "./backend/data.service";
+import { CreateComponent } from "./dialogs/create.component";
 
 import { MaterializeModule } from 'angular2-materialize';
 
@@ -27,7 +26,15 @@ import { FuncionariosModule } from "./funcionarios/funcionarios.module";
 import { servicosRouting } from "./servicos/servicos.routing";
 import { ServicosModule } from "./servicos/servicos.module";
 
+import { CalendarComponent } from "./calendar/calendar.component";
 import { calendarRouting } from "./calendar/calendar.routing";
+
+import { loginRouting } from "./components/autenticacao/login-routes";
+
+import { LogoutComponent } from "./components/autenticacao/logout-component";
+import { LoginComponent } from "./components/autenticacao/login-component";
+
+import { HttpUtilService } from './services/http-util-service';
 
 @NgModule({
   declarations: [
@@ -37,6 +44,8 @@ import { calendarRouting } from "./calendar/calendar.routing";
     CalendarComponent,
     NotFoundComponent,
     CreateComponent,
+    LogoutComponent,
+    LoginComponent,
     DayPilot.Angular.Calendar,
     DayPilot.Angular.Modal,
     DayPilot.Angular.Navigator
@@ -54,9 +63,10 @@ import { calendarRouting } from "./calendar/calendar.routing";
     ServicosModule,
     servicosRouting,
     calendarRouting,
+    loginRouting,
     routing,
   ],
-  providers: [DataService],
+  providers: [DataService,HttpUtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

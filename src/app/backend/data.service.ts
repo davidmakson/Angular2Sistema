@@ -5,44 +5,71 @@ import 'rxjs/Rx';
 import {DayPilot} from "daypilot-pro-angular";
 import EventData = DayPilot.EventData;
 
+import { HttpUtilService } from '../services/http-util-service';
+
 @Injectable()
 export class DataService {
 
-  constructor(private http : Http){
+  private path = 'agenda';
+
+	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	}
+
+  getEvents(dataDia: DayPilot.Date): Observable<EventData[]> {
+    return this.http.get(this.httpUtil.url(this.path + '/' + dataDia), 
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
-  getEvents(start: DayPilot.Date, end: DayPilot.Date): Observable<EventData[]> {
-    return this.http.post("/api/backend_events.php", {start: start, end: end}).map((response:Response) => response.json());
+  getAllEvents(): Observable<EventData[]> {
+		return this.http.get(this.httpUtil.url(this.path), this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   createEvent(params: CreateEventParams): Observable<BackendResult> {
-    return this.http.post("/api/backend_create.php", params).map((response:Response) => response.json());
+    //se nao der certo criar um model agenda para passar via parametro
+		//let params = JSON.stringify(agenda);
+
+    	return this.http.post(this.httpUtil.url(this.path), params, 
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros); 
   }
 
-  deleteEvent(id: string): Observable<BackendResult> {
-    return this.http.post("/api/backend_delete.php", {id: id}).map((response:Response) => response.json());
+  deleteEvent(id: number): Observable<BackendResult> {
+        return this.http.delete(this.httpUtil.url(this.path + '/' + id), 
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
   }
 
   moveEvent(params: MoveEventParams): Observable<BackendResult> {
-    return this.http.post("/api/backend_move.php", params).map((response:Response) => response.json());
-  }
+    //se nao der certo criar um model agenda para passar via parametro
+		//let params = JSON.stringify(agenda);
+
+    	return this.http.put(this.httpUtil.url(this.path), params, 
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);  }
 }
 
 export interface CreateEventParams {
-  id?: string | number;
+  id?: number;
   start: string;
   end: string;
   text: string;
 }
 
 export interface MoveEventParams {
-  id: string | number;
+  id: number;
   newStart: string;
   newEnd: string;
 }
 
 export interface BackendResult {
-  id: string | number;
+  id: number;
   result: string;
   message: string;
 }
