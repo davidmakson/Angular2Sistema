@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
 
+# Pré Requisitos
+
+`npm install https://npm.daypilot.org/daypilot-pro-angular/trial/8.3.2841.tar.gz --save`
+`npm install -g strongloop`
+`npm install -g loopback-cli`
+`npm install --save loopback-connector-mongodb`
+
+#If you are not using trusted certificates, enter the following command:
+`npm config -g set strict-ssl false`
+
+#If you are using a proxy server, enter the following commands:
+`npm config set proxy http://proxy_address:port`
+`npm config set https-proxy http://proxy_address:port`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
