@@ -5,9 +5,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Pré Requisitos
 
 `npm install https://npm.daypilot.org/daypilot-pro-angular/trial/8.3.2841.tar.gz --save`
+
 `npm install -g strongloop`
 `npm install -g loopback-cli`
 `npm install --save loopback-connector-mongodb`
+
+`net start MongoDB`
 
 #If you are not using trusted certificates, enter the following command:
 `npm config -g set strict-ssl false`

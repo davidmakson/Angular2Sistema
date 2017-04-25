@@ -20,7 +20,18 @@ import {CreateComponent} from "../dialogs/create.component";
 export class CalendarComponent implements OnInit, AfterViewInit {
   @ViewChild("calendar") calendar : DayPilot.Angular.Calendar;
   @ViewChild("create") create: CreateComponent;
-
+ 
+  //  var eventData = {
+  //  events : [
+  //    {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 35),'title':'Lunch with Mike'},
+  //    {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 45),'title':'Dev Meeting'},
+  //    {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 45),'title':'Hair cut'},
+  //    {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 30),'title':'Team breakfast'},
+  //    {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 15),'title':'Product showcase'}
+  //  ]
+  //};
+  
+  //JSON {"id":1, "start":"2009-05-10T13:15:00.000+10:00", "end":"2009-05-10T14:15:00.000+10:00", "text":"Lunch with Mike"}
   events: any[];
 
   navigatorConfig = {

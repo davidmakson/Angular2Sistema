@@ -34,6 +34,9 @@ import { loginRouting } from "./components/autenticacao/login-routes";
 import { LogoutComponent } from "./components/autenticacao/logout-component";
 import { LoginComponent } from "./components/autenticacao/login-component";
 
+import { SchedulerComponent } from "./scheduler/scheduler.component";
+
+
 import { HttpUtilService } from './services/http-util-service';
 
 @NgModule({
@@ -46,6 +49,7 @@ import { HttpUtilService } from './services/http-util-service';
     CreateComponent,
     LogoutComponent,
     LoginComponent,
+    SchedulerComponent,
     DayPilot.Angular.Calendar,
     DayPilot.Angular.Modal,
     DayPilot.Angular.Navigator
