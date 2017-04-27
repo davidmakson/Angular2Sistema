@@ -29,17 +29,9 @@ import { ServicosModule } from "./servicos/servicos.module";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { calendarRouting } from "./calendar/calendar.routing";
 
-import { loginRouting } from "./components/autenticacao/login-routes";
-
-import { LogoutComponent } from "./components/autenticacao/logout-component";
-import { LoginComponent } from "./components/autenticacao/login-component";
-
 import { SchedulerComponent } from "./scheduler/scheduler.component";
 
-
-import { HttpUtilService } from './services/http-util-service';
-
-@NgModule({
+import { HttpUtilService } from './services/http-util-service';@NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
@@ -47,8 +39,6 @@ import { HttpUtilService } from './services/http-util-service';
     CalendarComponent,
     NotFoundComponent,
     CreateComponent,
-    LogoutComponent,
-    LoginComponent,
     SchedulerComponent,
     DayPilot.Angular.Calendar,
     DayPilot.Angular.Modal,
@@ -67,7 +57,6 @@ import { HttpUtilService } from './services/http-util-service';
     ServicosModule,
     servicosRouting,
     calendarRouting,
-    loginRouting,
     routing,
   ],
   providers: [DataService,HttpUtilService],

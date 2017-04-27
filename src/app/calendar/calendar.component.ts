@@ -33,7 +33,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   
   //JSON {"id":1, "start":"2009-05-10T13:15:00.000+10:00", "end":"2009-05-10T14:15:00.000+10:00", "text":"Lunch with Mike"}
   events: any[];
-
+  
   navigatorConfig = {
     selectMode: "week"
   };

@@ -10,7 +10,7 @@ import { HttpUtilService } from '../services/http-util-service';
 @Injectable()
 export class DataService {
 
-  private path = 'agenda';
+  private path = 'api/events';
 
 	constructor(private http: Http, private httpUtil: HttpUtilService) {
 	}
